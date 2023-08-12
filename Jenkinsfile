@@ -17,10 +17,10 @@ pipeline {
 				bat "${mavenHome}/bin/mvn test"
 			}
 		}
-		stage('Deploy') {
-			steps {
-			//     	bat "${mavenHome}/bin/mvn jar:jar deploy:deploy"
-			}
-		}
+		// stage('Deploy') {
+		// 	steps {
+		// 	    	bat "${mavenHome}/bin/mvn jar:jar deploy:deploy"
+		// 	}
+		// }
 	}
 }
