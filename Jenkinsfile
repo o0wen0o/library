@@ -4,7 +4,7 @@ pipeline {
 		mavenHome = tool 'jenkins-maven'
 	}
 	tools {
-		jdk 'java-11'
+		jdk 'jdk-11.0.11'
 	}
 	stages {
 		stage('Build'){
