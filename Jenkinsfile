@@ -1,7 +1,7 @@
 pipeline {
 	agent any
 	environment {
-		mavenHome = tool 'jenkins-maven'
+		mavenHome = tool 'jenkins-maven-3.8.5'
 	}
 	tools {
 		jdk 'jdk-11.0.11'
