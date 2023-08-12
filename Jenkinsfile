@@ -18,9 +18,9 @@ pipeline {
 			}
 		}
 		stage('Deploy') {
-			steps {
-			    	bat "${mavenHome}/bin/mvn jar:jar deploy:deploy"
-			}
+			// steps {
+			//     	bat "${mavenHome}/bin/mvn jar:jar deploy:deploy"
+			// }
 		}
 	}
 }
