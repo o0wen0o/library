@@ -9,17 +9,17 @@ pipeline {
 	stages {
 		stage('Build'){
 			steps {
-				bat "mvn clean install -DskipTests"
+				sh "${mvnHome}/bin/mvn clean install -DskipTests"
 			}
 		}
 		stage('Test'){
 			steps{
-				bat "mvn test"
+				sh "${mvnHome}/bin/mvn test"
 			}
 		}
 		stage('Deploy') {
 			steps {
-			    bat "mvn jar:jar deploy:deploy"
+			    	sh "${mvnHome}/bin/mvn jar:jar deploy:deploy"
 			}
 		}
 	}
