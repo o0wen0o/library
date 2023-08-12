@@ -169,7 +169,7 @@ public class PatronProfileControllerIT {
     @Test
     public void shouldPlaceBookOnHold() throws Exception {
         given(placingOnHold.placeOnHold(any())).willReturn(Try.success(Success));
-        var request = "{\"bookId\":\"6e1dfec5-5cfe-487e-814e-d70114f5396e\", \"libraryBranchId\":\"a518e2ef-5f6c-43e3-a7fc-5d895e15be3a\",\"numberOfDays\":1}";
+        String request = "{\"bookId\":\"6e1dfec5-5cfe-487e-814e-d70114f5396e\", \"libraryBranchId\":\"a518e2ef-5f6c-43e3-a7fc-5d895e15be3a\",\"numberOfDays\":1}";
 
         // expect
         mvc.perform(post("/profiles/" + patronId.getPatronId() + "/holds")
@@ -182,7 +182,7 @@ public class PatronProfileControllerIT {
     @Test
     public void shouldReturn500IfSomethingFailedWhileDuringPlacingOnHold() throws Exception {
         given(placingOnHold.placeOnHold(any())).willReturn(Try.failure(new IllegalArgumentException()));
-        var request = "{\"bookId\":\"6e1dfec5-5cfe-487e-814e-d70114f5396e\", \"libraryBranchId\":\"a518e2ef-5f6c-43e3-a7fc-5d895e15be3a\",\"numberOfDays\":1}";
+        String request = "{\"bookId\":\"6e1dfec5-5cfe-487e-814e-d70114f5396e\", \"libraryBranchId\":\"a518e2ef-5f6c-43e3-a7fc-5d895e15be3a\",\"numberOfDays\":1}";
 
         // expect
         mvc.perform(post("/profiles/" + patronId.getPatronId() + "/holds")
