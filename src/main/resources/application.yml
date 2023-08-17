@@ -3,3 +3,15 @@ management:
     web:
       exposure:
         include: info, health, metrics, prometheus
+
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+
+
