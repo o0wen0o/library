@@ -21,7 +21,7 @@ pipeline {
 		stage('Static Code Analysis') {
 		    steps {
 			script {
-			    def scannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.MsBuildSonarRunnerInstallation'
+			    def scannerHome = tool name: 'SonarScanner', type: 'SonarScanner for MSBuild 5.13.1.76110 - .NET Fwk 4.6'
 			    withSonarQubeEnv('SonarQubeServer') {
 				bat "${scannerHome}/bin/sonar-scanner.bat -Dsonar.login=${env.SONAR_TOKEN}"
 			    }
