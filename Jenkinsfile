@@ -25,6 +25,41 @@ pipeline {
 				bat "${mavenHome}/bin/mvn test"
 			}
 		}
+
+		stage('Publish Reports') {
+		    steps {
+		        // Publish Checkstyle report
+		        publishHTML(target: [
+		            allowMissing: false,
+		            alwaysLinkToLastBuild: true,
+		            keepAll: true,
+		            reportDir: 'target/site',
+		            reportFiles: 'checkstyle-result.xml',
+		            reportName: 'Checkstyle Report',
+		        ])
+		
+		        // // Publish SpotBugs report
+		        // publishHTML(target: [
+		        //     allowMissing: false,
+		        //     alwaysLinkToLastBuild: true,
+		        //     keepAll: true,
+		        //     reportDir: 'target/site',
+		        //     reportFiles: 'spotbugsXml.xml',
+		        //     reportName: 'SpotBugs Report',
+		        // ])
+		
+		        // Publish PMD report
+		        publishHTML(target: [
+		            allowMissing: false,
+		            alwaysLinkToLastBuild: true,
+		            keepAll: true,
+		            reportDir: 'target/site',
+		            reportFiles: 'pmd.xml',
+		            reportName: 'PMD Report',
+		        ])
+		    }
+		}
+		
 		// stage('Deploy') {
 		// 	steps {
 		// 	    	bat "${mavenHome}/bin/mvn jar:jar deploy:deploy"
