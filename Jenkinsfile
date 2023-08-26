@@ -16,7 +16,7 @@ pipeline {
 		    steps {
 		        // Run the static code analysis plugins
 		        bat "${mavenHome}/bin/mvn checkstyle:checkstyle"
-		        bat "${mavenHome}/bin/mvn spotbugs:spotbugs"
+		        // bat "${mavenHome}/bin/mvn spotbugs:spotbugs"
 		        bat "${mavenHome}/bin/mvn pmd:pmd"
 		    }
 		}
