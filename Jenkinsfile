@@ -2,6 +2,7 @@ pipeline {
 	agent any
 	environment {
 		mavenHome = tool 'jenkins-maven-3.8.5'
+		SONAR_TOKEN = credentials('automation')
 	}
 	tools {
 		jdk 'jdk-11.0.11'
