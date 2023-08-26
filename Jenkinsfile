@@ -12,6 +12,14 @@ pipeline {
 				bat "${mavenHome}/bin/mvn clean install -DskipTests"
 			}
 		}
+		stage('Static Code Analysis') {
+		    steps {
+		        // Run the static code analysis plugins
+		        bat "${mavenHome}/bin/mvn checkstyle:checkstyle"
+		        bat "${mavenHome}/bin/mvn spotbugs:spotbugs"
+		        bat "${mavenHome}/bin/mvn pmd:pmd"
+		    }
+		}
 		stage('Test'){
 			steps{
 				bat "${mavenHome}/bin/mvn test"
