@@ -48,7 +48,7 @@ pipeline {
 		            allowMissing: false,
 		            alwaysLinkToLastBuild: true,
 		            keepAll: true,
-		            reportDir: 'target/site',
+		            reportDir: 'target/site/checkstyle',
 		            reportFiles: 'checkstyle-result.xml',
 		            reportName: 'Checkstyle Report',
 		        ])
@@ -68,7 +68,7 @@ pipeline {
 		            allowMissing: false,
 		            alwaysLinkToLastBuild: true,
 		            keepAll: true,
-		            reportDir: 'target/site',
+		            reportDir: 'target/site/pmd',
 		            reportFiles: 'pmd.xml',
 		            reportName: 'PMD Report',
 		        ])
