@@ -10,21 +10,20 @@ pipeline {
 	}
 	
 	stages {
-		stage('Build'){
-			steps {
+		stage('Build') {
+		  	steps {
 				bat "${mavenHome}/bin/mvn clean install -DskipTests"
 			}
 		}
 		
 		stage('Static Code Analysis') {
 		    steps {
-		        // Run the static code analysis plugins
-		        bat "${mavenHome}/bin/mvn checkstyle:checkstyle"
-                    	archiveArtifacts(artifacts: '**/target/site/checkstyle/index.html', allowEmptyArchive: true)
+			// Run the static code analysis plugins
+			bat "${mavenHome}/bin/mvn checkstyle:checkstyle"
+			archiveArtifacts(artifacts: '**/target/site/checkstyle/index.html', allowEmptyArchive: true)
 			    
-		        // bat "${mavenHome}/bin/mvn spotbugs:spotbugs"
-		        bat "${mavenHome}/bin/mvn pmd:pmd"
-	             }
+			bat "${mavenHome}/bin/mvn pmd:pmd"
+		     }
 		}
 
 		stage('Test and Code Coverage') {
@@ -35,7 +34,7 @@ pipeline {
 	                // Archive the JaCoCo code coverage report
                     	archiveArtifacts(artifacts: '**/target/site/jacoco/index.html', allowEmptyArchive: true)
 	            }
-	    }
+	    	}
 
 		stage('Publish Reports') {
 		    steps {
@@ -49,16 +48,6 @@ pipeline {
 		            reportName: 'Checkstyle Report',
 		        ])
 		
-		        // // Publish SpotBugs report
-		        // publishHTML(target: [
-		        //     allowMissing: false,
-		        //     alwaysLinkToLastBuild: true,
-		        //     keepAll: true,
-		        //     reportDir: 'target/site',
-		        //     reportFiles: 'spotbugsXml.xml',
-		        //     reportName: 'SpotBugs Report',
-		        // ])
-		
 		 //        // Publish PMD report
 		 //        publishHTML(target: [
 		 //            allowMissing: false,
@@ -69,15 +58,15 @@ pipeline {
 		 //            reportName: 'PMD Report',
 		 //        ])
 
-			// Publish JaCoCo code coverage report
-		        publishHTML(target: [
-		            allowMissing: false,
-		            alwaysLinkToLastBuild: true,
-		            keepAll: true,
-		            reportDir: 'target/site/jacoco',
-		            reportFiles: 'index.html',
-		            reportName: 'JaCoCo Code Coverage Report',
-		        ])
+			// // Publish JaCoCo code coverage report
+		 //        publishHTML(target: [
+		 //            allowMissing: false,
+		 //            alwaysLinkToLastBuild: true,
+		 //            keepAll: true,
+		 //            reportDir: 'target/site/jacoco',
+		 //            reportFiles: 'index.html',
+		 //            reportName: 'JaCoCo Code Coverage Report',
+		 //        ])
 		    }
 		}
 	}
