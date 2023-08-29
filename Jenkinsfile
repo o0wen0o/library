@@ -34,9 +34,9 @@ pipeline {
 
 		stage('Archive Reports') {
 		    steps {
-		        archiveArtifacts(artifacts: 'target/site/checkstyle.html', allowEmptyArchive: true)
-		        archiveArtifacts(artifacts: 'target/site/pmd.html', allowEmptyArchive: true)
-		        archiveArtifacts(artifacts: 'target/site/jacoco.html', allowEmptyArchive: true)
+		        archiveArtifacts(artifacts: 'target/site/checkstyle/*.html', allowEmptyArchive: true)
+		        archiveArtifacts(artifacts: 'target/site/pmd/*.html', allowEmptyArchive: true)
+		        archiveArtifacts(artifacts: 'target/site/jacoco/*.html', allowEmptyArchive: true)
 		    }
 		}
 
@@ -47,7 +47,7 @@ pipeline {
 		            allowMissing: false,
 		            alwaysLinkToLastBuild: true,
 		            keepAll: true,
-		            reportDir: 'target/site/checkstyle',
+		            reportDir: 'target/site/',
 		            reportFiles: 'checkstyle-result.html, pmd.html, jacoco.html',
 		            reportName: 'Checkstyle Report',
 		        ])
