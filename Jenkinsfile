@@ -23,12 +23,9 @@ pipeline {
 		        // bat "${mavenHome}/bin/mvn spotbugs:spotbugs"
 		        bat "${mavenHome}/bin/mvn pmd:pmd"
 			    
-	                // Archive the Checkstyle code coverage report
-	                archiveArtifacts(artifacts: '**/target/site/checkstyle/index.html', allowEmptyArchive: true)
-			    
-	                // Archive the PMD code coverage report
-	                archiveArtifacts(artifacts: '**/target/site/pmd/index.html', allowEmptyArchive: true)
-		    }
+	                 // Archive the Checkstyle and PMD code analysis reports
+	                archiveArtifacts(artifacts: '**/target/site/checkstyle, **/target/site/pmd', allowEmptyArchive: true)
+	             }
 		}
 
 		stage('Test and Code Coverage') {
