@@ -20,21 +20,19 @@ pipeline {
 		    steps {
 			// Run the static code analysis plugins
 			bat "${mavenHome}/bin/mvn checkstyle:checkstyle"
-			archiveArtifacts(artifacts: '**/target/site/checkstyle/index.html', allowEmptyArchive: true)
-			    
 			bat "${mavenHome}/bin/mvn pmd:pmd"
 		     }
 		}
 
-		stage('Test and Code Coverage') {
-	            steps {
-	                // Run tests and generate code coverage data with JaCoCo
-	                bat "${mavenHome}/bin/mvn clean test jacoco:report"
+		// stage('Test and Code Coverage') {
+	 //            steps {
+	 //                // Run tests and generate code coverage data with JaCoCo
+	 //                bat "${mavenHome}/bin/mvn clean test jacoco:report"
 
-	                // Archive the JaCoCo code coverage report
-                    	archiveArtifacts(artifacts: '**/target/site/jacoco/index.html', allowEmptyArchive: true)
-	            }
-	    	}
+	 //                // Archive the JaCoCo code coverage report
+  //                   	archiveArtifacts(artifacts: '**/target/site/jacoco/index.html', allowEmptyArchive: true)
+	 //            }
+	 //    	}
 
 		stage('Publish Reports') {
 		    steps {
@@ -48,15 +46,15 @@ pipeline {
 		            reportName: 'Checkstyle Report',
 		        ])
 		
-		 //        // Publish PMD report
-		 //        publishHTML(target: [
-		 //            allowMissing: false,
-		 //            alwaysLinkToLastBuild: true,
-		 //            keepAll: true,
-		 //            reportDir: 'target/site/pmd',
-		 //            reportFiles: 'pmd.html',
-		 //            reportName: 'PMD Report',
-		 //        ])
+		        // Publish PMD report
+		        publishHTML(target: [
+		            allowMissing: false,
+		            alwaysLinkToLastBuild: true,
+		            keepAll: true,
+		            reportDir: 'target/site/pmd',
+		            reportFiles: 'pmd.html',
+		            reportName: 'PMD Report',
+		        ])
 
 			// // Publish JaCoCo code coverage report
 		 //        publishHTML(target: [
