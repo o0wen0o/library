@@ -32,6 +32,14 @@ pipeline {
 	            }
 	        }
 
+		stage('Archive Reports') {
+		    steps {
+		        archiveArtifacts(artifacts: 'target/site/checkstyle.html', allowEmptyArchive: true)
+		        archiveArtifacts(artifacts: 'target/site/pmd.html', allowEmptyArchive: true)
+		        archiveArtifacts(artifacts: 'target/site/jacoco.html', allowEmptyArchive: true)
+		    }
+		}
+
 		stage('Publish Reports') {
 		    steps {
 		        // Publish Checkstyle report
@@ -40,7 +48,7 @@ pipeline {
 		            alwaysLinkToLastBuild: true,
 		            keepAll: true,
 		            reportDir: 'target/site/checkstyle',
-		            reportFiles: 'checkstyle-result.html',
+		            reportFiles: 'checkstyle-result.html, pmd.html, jacoco.html',
 		            reportName: 'Checkstyle Report',
 		        ])
 		
@@ -54,25 +62,25 @@ pipeline {
 		        //     reportName: 'SpotBugs Report',
 		        // ])
 		
-		        // Publish PMD report
-		        publishHTML(target: [
-		            allowMissing: false,
-		            alwaysLinkToLastBuild: true,
-		            keepAll: true,
-		            reportDir: 'target/site/pmd',
-		            reportFiles: 'pmd.html',
-		            reportName: 'PMD Report',
-		        ])
+		 //        // Publish PMD report
+		 //        publishHTML(target: [
+		 //            allowMissing: false,
+		 //            alwaysLinkToLastBuild: true,
+		 //            keepAll: true,
+		 //            reportDir: 'target/site/pmd',
+		 //            reportFiles: 'pmd.html',
+		 //            reportName: 'PMD Report',
+		 //        ])
 
-			// Publish JaCoCo code coverage report
-		        publishHTML(target: [
-		            allowMissing: false,
-		            alwaysLinkToLastBuild: true,
-		            keepAll: true,
-		            reportDir: 'target/site/jacoco',
-		            reportFiles: 'index.html',
-		            reportName: 'JaCoCo Code Coverage Report',
-		        ])
+			// // Publish JaCoCo code coverage report
+		 //        publishHTML(target: [
+		 //            allowMissing: false,
+		 //            alwaysLinkToLastBuild: true,
+		 //            keepAll: true,
+		 //            reportDir: 'target/site/jacoco',
+		 //            reportFiles: 'index.html',
+		 //            reportName: 'JaCoCo Code Coverage Report',
+		 //        ])
 		    }
 		}
 	}
