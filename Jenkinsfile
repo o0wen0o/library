@@ -20,6 +20,8 @@ pipeline {
 		    steps {
 		        // Run the static code analysis plugins
 		        bat "${mavenHome}/bin/mvn checkstyle:checkstyle"
+                    	archiveArtifacts(artifacts: '**/target/site/checkstyle/index.html', allowEmptyArchive: true)
+			    
 		        // bat "${mavenHome}/bin/mvn spotbugs:spotbugs"
 		        bat "${mavenHome}/bin/mvn pmd:pmd"
 	             }
@@ -31,21 +33,21 @@ pipeline {
 	                bat "${mavenHome}/bin/mvn clean test jacoco:report"
 
 	                // Archive the JaCoCo code coverage report
-                    archiveArtifacts(artifacts: '**/target/site/jacoco/index.html', allowEmptyArchive: true)
+                    	archiveArtifacts(artifacts: '**/target/site/jacoco/index.html', allowEmptyArchive: true)
 	            }
 	    }
 
 		stage('Publish Reports') {
 		    steps {
-// 		        // Publish Checkstyle report
-// 		        publishHTML(target: [
-// 		            allowMissing: false,
-// 		            alwaysLinkToLastBuild: true,
-// 		            keepAll: true,
-// 		            reportDir: 'target/site/',
-// 		            reportFiles: 'checkstyle-result.html, pmd.html, jacoco.html',
-// 		            reportName: 'Checkstyle Report',
-// 		        ])
+		        // Publish Checkstyle report
+		        publishHTML(target: [
+		            allowMissing: false,
+		            alwaysLinkToLastBuild: true,
+		            keepAll: true,
+		            reportDir: 'target/site/checkstyle',
+		            reportFiles: 'index.html',
+		            reportName: 'Checkstyle Report',
+		        ])
 		
 		        // // Publish SpotBugs report
 		        // publishHTML(target: [
