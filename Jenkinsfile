@@ -22,9 +22,6 @@ pipeline {
 		        bat "${mavenHome}/bin/mvn checkstyle:checkstyle"
 		        // bat "${mavenHome}/bin/mvn spotbugs:spotbugs"
 		        bat "${mavenHome}/bin/mvn pmd:pmd"
-			    
-	                 // Archive the Checkstyle and PMD code analysis reports
-	                archiveArtifacts(artifacts: '**/target/site/checkstyle, **/target/site/pmd', allowEmptyArchive: true)
 	             }
 		}
 
@@ -32,9 +29,6 @@ pipeline {
 	            steps {
 	                // Run tests and generate code coverage data with JaCoCo
 	                bat "${mavenHome}/bin/mvn clean test jacoco:report"
-	                
-	                // Archive the JaCoCo code coverage report
-	                archiveArtifacts(artifacts: '**/target/site/jacoco/index.html', allowEmptyArchive: true)
 	            }
 	        }
 
@@ -46,7 +40,7 @@ pipeline {
 		            alwaysLinkToLastBuild: true,
 		            keepAll: true,
 		            reportDir: 'target/site/checkstyle',
-		            reportFiles: 'checkstyle-result.xml',
+		            reportFiles: 'checkstyle-result.html',
 		            reportName: 'Checkstyle Report',
 		        ])
 		
@@ -66,7 +60,7 @@ pipeline {
 		            alwaysLinkToLastBuild: true,
 		            keepAll: true,
 		            reportDir: 'target/site/pmd',
-		            reportFiles: 'pmd.xml',
+		            reportFiles: 'pmd.html',
 		            reportName: 'PMD Report',
 		        ])
 
@@ -81,11 +75,5 @@ pipeline {
 		        ])
 		    }
 		}
-		
-		// stage('Deploy') {
-		// 	steps {
-		// 	    	bat "${mavenHome}/bin/mvn jar:jar deploy:deploy"
-		// 	}
-		// }
 	}
 }
