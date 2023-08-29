@@ -284,6 +284,14 @@
                         <version>10.12.2</version>
                     </dependency>
                 </dependencies>
+                <executions>
+                    <execution>
+                        <phase>verify</phase> <!-- Specify the phase -->
+                        <goals>
+                            <goal>checkstyle</goal> <!-- Specify the goal -->
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <!-- Configuration options here -->
                 </configuration>
